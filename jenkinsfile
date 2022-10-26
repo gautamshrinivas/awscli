@@ -1,0 +1,17 @@
+pipeline {
+    agent { label 'node'}
+    stages {
+        stage ('vcs') {
+            steps {
+                git url: 'https://github.com/gautamshrinivas/awscli.git',
+                branch: 'master'
+            }
+        }
+        stage ('build') {
+            steps {
+                sh'chmod +x ec2.sh'
+                sh './ec2.sh'
+            }
+        }
+    }
+}
